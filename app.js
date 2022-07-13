@@ -3,8 +3,8 @@ let playerHand;
 let playerSelection;
 let computerSelection = computerPlay();
 let gameRounds = 5;
-let computerScore = 1;
-let playerScore = 1;
+let computerScore = 0;
+let playerScore = 0;
 let roundWinner;
 
 function computerPlay(){
@@ -16,15 +16,18 @@ function game(){
     for (let i = 0; i < gameRounds; i++) {
         playRound(playerSelection, computerSelection);
 
-        if(playerScore >= 5 || computerScore >= 5){
+        if(playerScore === 5 || computerScore === 5 || i === gameRounds){
             if(playerScore > computerScore) {
                 console.log(`Player has won the game with a score of ${playerScore} vs computer score of ${computerScore}`);
+                break;
             }
             if(playerScore < computerScore){
                 console.log(`Computer has won the game with a score of ${computerScore} vs player score of ${playerScore}`);
+                break;
             } 
             if(playerScore === computerScore) {
                 console.log(`Match was undecided! Player score was ${playerScore} and computer score was ${computerScore}`);
+                break;
             }
             break;
         }
@@ -41,8 +44,8 @@ function playRound(playerSelection, computerSelection){
 
     if(playerSelection === computerSelection){
         roundWinner = 'tie';
-
-        result = `It's a tie. Player picked ${playerSelection}, Computer picked ${computerSelection}`;
+        gameRounds++;
+        result = `It's a tie! Extra round has been added! Total of ${gameRounds} rounds`;
 
         return result;
     }
